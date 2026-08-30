@@ -1,0 +1,26 @@
+[
+  {
+    "id": "first_harvest",
+    "name": "First Harvest",
+    "giver": "system",
+    "description": "Plant and harvest your first crops on the homestead.",
+    "objectives": [{"type": "harvest", "count": 3}],
+    "rewards": {"gold": 30, "xp": 40, "trust": {}}
+  },
+  {
+    "id": "meet_lyra",
+    "name": "Meet Lyra",
+    "giver": "lyra",
+    "description": "Talk to Lyra Ashhoof at the yard gate and help with the fence.",
+    "objectives": [{"type": "talk", "target": "lyra"}, {"type": "flag", "flag": "fence_repaired"}],
+    "rewards": {"gold": 20, "xp": 50, "trust": {"lyra": 1}}
+  },
+  {
+    "id": "gloam_patrol",
+    "name": "Gloam Patrol",
+    "giver": "mara",
+    "description": "Clear a Gloam Shade near the Whisperwood edge.",
+    "objectives": [{"type": "combat_win", "enemy": "gloam_shade"}],
+    "rewards": {"gold": 40, "xp": 80, "trust": {"mara": 1}}
+  }
+]

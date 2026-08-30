@@ -1,0 +1,6 @@
+{
+  "yard": {"id": "yard", "name": "Homestead Yard", "safe": true, "nodes": ["farm", "paddock", "workbench"]},
+  "home": {"id": "home", "name": "Farmhouse", "safe": true, "rooms": ["kitchen", "lounge", "bedroom", "bath"]},
+  "village": {"id": "village", "name": "Sunfield Village", "safe": true, "nodes": ["shop", "guild", "tavern", "clinic"]},
+  "forest": {"id": "forest", "name": "Whisperwood Forest", "safe": false, "nodes": ["path", "shrine", "resource_nodes", "encounter"]}
+}

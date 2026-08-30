@@ -1,0 +1,18 @@
+{
+  "lyra": {
+    "greeting": "The fence still needs work, but the yard looks better with you here.",
+    "trust_3": "I trust you with the southern plots now.",
+    "trust_6": "Come walk with me after dusk if you want.",
+    "romance_gate": "Only if you mean it — I need to hear the words."
+  },
+  "sable": {
+    "greeting": "The moths are quiet tonight. Good for listening.",
+    "trust_3": "You see more than most. That is rare.",
+    "trust_6": "Stay a while. The night is kinder with company."
+  },
+  "mara": {
+    "greeting": "Sun's still high. Keep your weapons clean.",
+    "trust_3": "You fight well enough. Don't get cocky.",
+    "trust_6": "I could use a partner who watches my back."
+  }
+}
