@@ -1,0 +1,11 @@
+{
+  "weapons": [
+    {"id": "iron_sword", "name": "Iron Sword", "damage": 15, "type": "melee"},
+    {"id": "moon_staff", "name": "Moon Staff", "damage": 12, "type": "magic"}
+  ],
+  "spells": [
+    {"id": "purify", "name": "Purify", "effect": "break_armor_then_remove", "cost": 20},
+    {"id": "ember_bolt", "name": "Ember Bolt", "damage": 25, "element": "ember"},
+    {"id": "gale_slash", "name": "Gale Slash", "damage": 18, "element": "gale"}
+  ]
+}

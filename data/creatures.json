@@ -1,0 +1,3 @@
+[
+  {"id": "mossbun", "name": "Mossbun", "type": "rabbit", "breedable": true, "base_stats": {"vitality": 4, "power": 2, "grace": 6, "insight": 3, "bond": 5}}
+]

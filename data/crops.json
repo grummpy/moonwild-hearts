@@ -1,0 +1,4 @@
+[
+  {"id": "wheat", "name": "Wheat", "grow_periods": 2, "sell": 8, "xp": 5},
+  {"id": "moonberry", "name": "Moonberry", "grow_periods": 3, "sell": 18, "xp": 10}
+]

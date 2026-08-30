@@ -1,0 +1,5 @@
+[
+  {"recipe_id": "basic_meal", "name": "Basic Meal", "station": "Kitchen", "time": 1, "inputs": {"wheat": 2}, "outputs": {"basic_meal": 1}},
+  {"recipe_id": "iron_watering_can", "name": "Iron Watering Can", "station": "Forge", "time": 2, "inputs": {"iron_ingot": 5, "hardwood": 2}, "outputs": {"iron_watering_can": 1}},
+  {"recipe_id": "moon_salve", "name": "Moon Herb Salve", "station": "Alchemy", "time": 1, "inputs": {"mintleaf": 3, "glowmoss": 1}, "outputs": {"moon_salve": 2}}
+]
