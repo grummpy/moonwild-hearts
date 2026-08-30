@@ -1,0 +1,8 @@
+# Large media (use Git LFS or download separately)
+*.mp4
+*.mov
+node_modules/
+.godot/
+export/
+*.import
+.DS_Store

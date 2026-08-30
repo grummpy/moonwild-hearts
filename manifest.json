@@ -1,0 +1,13 @@
+{
+  "name": "Moonwild Hearts",
+  "short_name": "Moonwild",
+  "description": "Adults-only moonlit pastoral farming RPG with beautiful nude Moonkin companions, creature breeding, and party combat. 18+ only.",
+  "start_url": "./game.html",
+  "display": "standalone",
+  "background_color": "#0d1b24",
+  "theme_color": "#e8a84a",
+  "orientation": "any",
+  "icons": [],
+  "categories": ["games", "entertainment"],
+  "lang": "en"
+}
