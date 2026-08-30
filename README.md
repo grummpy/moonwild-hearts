@@ -9,55 +9,46 @@ Farm, craft, breed non-humanoid magical creatures, explore, fight the Gloam, and
 **Live (after enabling Pages):**  
 https://grummpy.github.io/moonwild-hearts/game.html
 
-Or locally:
-1. Clone or download this repo
-2. Open `game.html` in a modern browser
-3. Confirm 18+ age gate
-4. Explore tabs: **Explore** (village / home / forest / yard), Farm, Craft, Skills, Inventory, Companions, Time
+Or locally: open `game.html` after downloading the full pack.
 
-**Note on media**: Full high-res art, videos (dances, combat, afterglow), and large assets are large. See [docs/GIT_LFS.md](docs/GIT_LFS.md). The game runs with placeholders/missing media gracefully.
+## Full Asset Pack Download (224 MB)
 
-## Enable GitHub Pages (one click)
+**Direct download (complete package with all art, videos, systems):**  
+https://drive.google.com/file/d/1mqj-x1NUxhowCKWWWwOPPys90OXfBDuK/view?usp=drivesdk
 
-See [docs/GITHUB_PAGES.md](docs/GITHUB_PAGES.md) — Settings → Pages → main branch → root. Then the link above works for anyone.
+*(File name: Moonwild_Hearts_v1.1_FULL_Complete_Asset_Pack.zip)*
 
-## Features (Vertical Slice)
+After download: unzip → open `game.html` → confirm 18+.
+
+## Create GitHub Release (recommended for permanent public download)
+
+See [docs/RELEASE.md](docs/RELEASE.md) — one-time 2-minute steps to publish the same zip as a proper GitHub Release so the download lives at:
+https://github.com/grummpy/moonwild-hearts/releases
+
+## Features
 
 - Hunk barbarian player character
-- 6 adult Moonkin companions (centaur, moth, river dragon, faun, harpy, lioness) with trust/quest/intimacy systems
+- 6 adult Moonkin companions with trust / quest / intimacy systems
 - Explorable Homestead, Farmhouse, Sunfield Village, Whisperwood Forest
-- Crafting stations & queues (game-time based)
-- Leveling + 6 skills (Farming, Foraging, Crafting, Combat, Care, Social)
-- Resource gathering, inventory, buy/sell
-- Consistent day/period/season time system + sleep + relaxed mode
-- Party combat with Purify mechanic, monsters, weapons/spells
-- Creature breeding (non-humanoid only, lineage blocked)
-- Adult content settings, privacy screen (P), consent-gated romance & private scenes
-- Godot 4.x bootstrap with export presets
+- Crafting, leveling (6 skills), resources, consistent time system
+- Party combat, monsters, weapons/spells
+- Creature breeding (non-humanoid only)
+- Consent-gated adult content + privacy screen
+- Godot 4.x bootstrap
 
 ## Content & Safety
 
-- All romanceable characters explicitly adult (ages 27–45)
-- Nudity default for social scenes; erotic/private intimacy gated by relationship + consent flags
-- No minors, no non-consent, no bestiality, family wing non-sexual
-- Breedable creatures are non-humanoid magical animals only
-
-## Godot
-
-Open `godot_project/` in Godot 4.2+. Web/PWA export preset included. See scripts for GameState, FarmSystem, CombatSystem, RelationshipSystem, AdultContentManager, SaveSystem.
+All romanceable characters are explicitly adult (27–45). No minors, no non-consent, no bestiality. Family wing non-sexual. Breedable creatures are non-humanoid magical animals only.
 
 ## Docs
 
-- [GitHub Pages deploy](docs/GITHUB_PAGES.md)
-- [Git LFS for full media pack](docs/GIT_LFS.md)
+- [GitHub Pages](docs/GITHUB_PAGES.md)
+- [Git LFS](docs/GIT_LFS.md)
+- [Create Release](docs/RELEASE.md)
 
-## License / Distribution
+## License
 
-Adults-only game. Intended for adult-permitting platforms. Review local laws and storefront policies before distribution. No real-money timers, gacha, or selling of affection.
-
-## Credits
-
-Original production bible + Grok-assisted build. All characters and art original.
+Adults-only creative work. Personal / non-commercial use with credit. Commercial use requires permission.
 
 ---
-*Made for adult players. Confirm you are 18+ before playing.*
+*Confirm you are 18+ before playing.*
