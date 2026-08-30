@@ -1,0 +1,8 @@
+{
+  "private_intimacy_options": [
+    {"id": "sensual_dance", "name": "Private Seductive Dance", "love_gain": 1, "climax": false},
+    {"id": "anal_intimacy", "name": "Deep Rear Intimate Connection (Anal)", "love_gain": 5, "climax": true, "always_climax": true, "love_ratio_boost": 0.25},
+    {"id": "afterglow", "name": "Afterglow Embrace", "love_gain": 2, "climax": false}
+  ],
+  "rules": {"anal_always_climax": true, "consent_required": true, "platonic_route_unaffected": true}
+}

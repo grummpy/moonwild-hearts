@@ -1,0 +1,10 @@
+{
+  "day_length_minutes": 18,
+  "periods": ["Morning", "Afternoon", "Evening", "Night"],
+  "period_minutes": 4.5,
+  "season_days": 28,
+  "seasons": ["Spring", "Summer", "Autumn", "Winter"],
+  "sleep_advances_to": "Morning",
+  "craft_queues_run_in_game_time": true,
+  "relaxed_time_option": true
+}

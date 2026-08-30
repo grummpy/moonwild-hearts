@@ -1,0 +1,9 @@
+{
+  "species_groups": {"rabbit": ["mossbun"], "compatible": true},
+  "rules": {
+    "block_lineage": ["parent_child", "sibling", "grandparent"],
+    "generations_tracked": 5,
+    "inherit_visible_traits": 2,
+    "mutation_chance": 0.08
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "player_level_cap": 40,
+  "skills": {
+    "farming": {"max": 10},
+    "foraging": {"max": 10},
+    "crafting": {"max": 10},
+    "combat": {"max": 10},
+    "care": {"max": 10},
+    "social": {"max": 10}
+  },
+  "stat_points_per_level": 1,
+  "talent_every_5_levels": true
+}
