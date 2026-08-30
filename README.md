@@ -6,12 +6,20 @@ Farm, craft, breed non-humanoid magical creatures, explore, fight the Gloam, and
 
 ## Play Now (Browser)
 
+**Live (after enabling Pages):**  
+https://grummpy.github.io/moonwild-hearts/game.html
+
+Or locally:
 1. Clone or download this repo
-2. Open `game.html` in a modern browser (Chrome/Firefox/Edge)
+2. Open `game.html` in a modern browser
 3. Confirm 18+ age gate
 4. Explore tabs: **Explore** (village / home / forest / yard), Farm, Craft, Skills, Inventory, Companions, Time
 
-**Note on media**: Full high-res art, videos (dances, combat, afterglow), and large assets are large. Place corresponding folders (`portraits/`, `videos/`, `monsters/`, `village/`, etc.) next to `game.html` if you have the complete asset pack. The game runs with placeholders/missing media gracefully.
+**Note on media**: Full high-res art, videos (dances, combat, afterglow), and large assets are large. See [docs/GIT_LFS.md](docs/GIT_LFS.md). The game runs with placeholders/missing media gracefully.
+
+## Enable GitHub Pages (one click)
+
+See [docs/GITHUB_PAGES.md](docs/GITHUB_PAGES.md) — Settings → Pages → main branch → root. Then the link above works for anyone.
 
 ## Features (Vertical Slice)
 
@@ -37,6 +45,11 @@ Farm, craft, breed non-humanoid magical creatures, explore, fight the Gloam, and
 ## Godot
 
 Open `godot_project/` in Godot 4.2+. Web/PWA export preset included. See scripts for GameState, FarmSystem, CombatSystem, RelationshipSystem, AdultContentManager, SaveSystem.
+
+## Docs
+
+- [GitHub Pages deploy](docs/GITHUB_PAGES.md)
+- [Git LFS for full media pack](docs/GIT_LFS.md)
 
 ## License / Distribution
 
