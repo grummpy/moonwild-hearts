@@ -1,0 +1,10 @@
+[
+  {"id": "softwood", "name": "Softwood", "cat": "wood", "value": 5},
+  {"id": "hardwood", "name": "Hardwood", "cat": "wood", "value": 15},
+  {"id": "stone", "name": "Stone", "cat": "ore", "value": 3},
+  {"id": "iron_ingot", "name": "Iron Ingot", "cat": "ore", "value": 25},
+  {"id": "mintleaf", "name": "Mintleaf", "cat": "herb", "value": 8},
+  {"id": "glowmoss", "name": "Glowmoss", "cat": "fungi", "value": 20},
+  {"id": "wheat", "name": "Wheat", "cat": "crop", "value": 10},
+  {"id": "monster_core", "name": "Monster Core", "cat": "drop", "value": 50}
+]

@@ -1,0 +1,9 @@
+; Engine configuration file.
+config_version=5
+[application]
+config/name="Moonwild Hearts"
+config/description="Adults-only moonlit pastoral farming RPG"
+config/features=PackedStringArray("4.2", "Forward Plus")
+[autoload]
+GameState="*res://scripts/game_state.gd"
+AdultContent="*res://scripts/adult_content_manager.gd"

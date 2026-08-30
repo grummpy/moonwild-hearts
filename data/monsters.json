@@ -1,0 +1,7 @@
+[
+  {"id": "gloam_shade", "name": "Gloam Shade", "hp": 80, "armor": 40},
+  {"id": "hollow_beast", "name": "Hollow Beast", "hp": 120, "armor": 30},
+  {"id": "gloam_warden", "name": "Gloam Warden", "hp": 400, "armor": 80},
+  {"id": "thorned", "name": "Thorned", "hp": 100, "armor": 50},
+  {"id": "lost_automata", "name": "Lost Automata", "hp": 150, "armor": 60}
+]

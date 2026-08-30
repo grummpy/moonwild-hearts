@@ -1,0 +1,8 @@
+[
+  {"companion_id": "lyra_ashhoof", "display_name": "Lyra Ashhoof", "adult_age": 29, "species": "centaur", "combat_role": "defender", "romanceable": true},
+  {"companion_id": "sable_nightbloom", "display_name": "Sable Nightbloom", "adult_age": 34, "species": "moth_woman", "combat_role": "debuff_support", "romanceable": true},
+  {"companion_id": "neris_reedscale", "display_name": "Neris Reedscale", "adult_age": 41, "species": "river_dragon", "combat_role": "bruiser_control", "romanceable": true},
+  {"companion_id": "pippa_bramblehorn", "display_name": "Pippa Bramblehorn", "adult_age": 27, "species": "faun", "combat_role": "traps_burst", "romanceable": true},
+  {"companion_id": "vesper_crowe", "display_name": "Vesper Crowe", "adult_age": 38, "species": "harpy", "combat_role": "ranged_critical", "romanceable": true},
+  {"companion_id": "mara_sunsmane", "display_name": "Mara Sunsmane", "adult_age": 45, "species": "lioness", "combat_role": "frontline_leader", "romanceable": true}
+]
