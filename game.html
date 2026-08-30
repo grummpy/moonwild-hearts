@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Moonwild Hearts v1.1 — Full Explorable + Systems</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e8a84a">
+<style>
+:root{--teal:#1a3a4a;--amber:#e8a84a;--moon:#7ec8e3;--warm:#f5e6c8;--bg:#0d1b24;--card:#1e2f3a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--warm);min-height:100vh;overflow-x:hidden}
+.header{background:rgba(0,0,0,.75);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--amber);position:sticky;top:0;z-index:50;flex-wrap:wrap;gap:8px}
+.header h1{font-size:1.2rem;color:var(--amber)}
+.hud{font-size:.9rem;color:var(--moon)}
+.tabs{display:flex;gap:6px;padding:8px;background:var(--card);flex-wrap:wrap;justify-content:center}
+.tab{background:var(--teal);border:1px solid var(--moon);color:var(--warm);padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600}
+.tab:hover,.tab.active{background:var(--amber);color:#111}
+.panel{display:none;padding:16px;max-width:1100px;margin:0 auto}
+.panel.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid #2a4a5a}
+.card img{width:100%;height:200px;object-fit:cover;display:block}
+.card .info{padding:10px}
+.btn{background:var(--amber);color:#111;border:none;padding:10px 16px;border-radius:8px;font-weight:700;cursor:pointer;margin:4px}
+.btn.sec{background:var(--teal);color:var(--warm);border:1px solid var(--moon)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.log{background:#111;padding:10px;border-radius:8px;max-height:140px;overflow-y:auto;font-size:.85rem;margin-top:10px}
+.bar{height:10px;background:#333;border-radius:5px;margin:4px 0}
+.bar-fill{height:100%;background:var(--amber);border-radius:5px;transition:width .3s}
+.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px}
+.inv-item{background:#2a3a4a;padding:8px;border-radius:6px;text-align:center;font-size:.8rem;cursor:pointer}
+.zone{cursor:pointer;transition:transform .15s}
+.zone:hover{transform:scale(1.02)}
+#age-gate{position:fixed;inset:0;background:var(--bg);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
+#privacy{position:fixed;inset:0;background:#111;color:#888;display:none;align-items:center;justify-content:center;font-size:2rem;z-index:9999;flex-direction:column}
+#privacy.show{display:flex}
+</style>
+</head>
+<body>
+<div id="age-gate">
+  <h2 style="color:var(--amber)">🌙 Moonwild Hearts v1.1</h2>
+  <p style="max-width:480px;margin:12px 0">Adults 18+ only. Full explorable village/home/forest, crafting, leveling, resources, consistent time. Hunk barbarian + nude Moonkin.</p>
+  <button class="btn" onclick="startGame()">I am 18+ — Enter</button>
+</div>
+
+<div id="game" style="display:none">
+  <div class="header">
+    <h1>Moonwild Hearts</h1>
+    <div class="hud">
+      Day <span id="day">1</span> · <span id="period">Morning</span> · Season <span id="season">Spring</span><br>
+      Gold <span id="gold">50</span> · Level <span id="level">1</span> · XP <span id="xp">0</span>/100
+      <button class="btn sec" style="padding:4px 8px;font-size:.75rem" onclick="togglePrivacy()">P</button>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-tab="explore">🗺️ Explore</button>
+    <button class="tab" data-tab="farm">🌱 Farm</button>
+    <button class="tab" data-tab="craft">🔨 Craft</button>
+    <button class="tab" data-tab="skills">📈 Skills</button>
+    <button class="tab" data-tab="inventory">🎒 Inventory</button>
+    <button class="tab" data-tab="companions">💕 Companions</button>
+    <button class="tab" data-tab="time">⏰ Time</button>
+  </div>
+
+  <div id="explore" class="panel active">
+    <h2 style="color:var(--amber)">Explorable World</h2>
+    <p>Click zones to explore. Full graphics load if media folders are present.</p>
+    <div class="grid" id="zone-grid"></div>
+    <div id="zone-detail" style="margin-top:16px;display:none">
+      <h3 id="zone-title" style="color:var(--amber)"></h3>
+      <div id="zone-actions" style="margin-top:10px"></div>
+    </div>
+    <div class="log" id="log"></div>
+  </div>
+
+  <div id="farm" class="panel">
+    <h2 style="color:var(--amber)">Farm Plots</h2>
+    <p>Click to plant/harvest. Time advances growth consistently.</p>
+    <div id="farm-grid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;max-width:420px;margin:12px auto"></div>
+    <p>Seeds: <span id="seeds">12</span> · Harvested: <span id="harvested">0</span></p>
+    <button class="btn" onclick="waterAll()">💧 Water All</button>
+  </div>
+
+  <div id="craft" class="panel">
+    <h2 style="color:var(--amber)">Crafting System</h2>
+    <div class="grid" id="craft-list"></div>
+    <p style="margin-top:10px">Queues run in game time. Assistants optional.</p>
+  </div>
+
+  <div id="skills" class="panel">
+    <h2 style="color:var(--amber)">Leveling & Skills</h2>
+    <p>Level <span id="plevel">1</span> · XP <span id="pxp">0</span> / <span id="pxpnext">100</span></p>
+    <div class="bar"><div class="bar-fill" id="xpbar" style="width:0%"></div></div>
+    <div id="skill-list" style="margin-top:12px"></div>
+    <button class="btn" onclick="gainXP(25)">Debug +25 XP</button>
+  </div>
+
+  <div id="inventory" class="panel">
+    <h2 style="color:var(--amber)">Resources & Inventory</h2>
+    <div class="inv-grid" id="inv-grid"></div>
+  </div>
+
+  <div id="companions" class="panel">
+    <h2 style="color:var(--amber)">Companions & Player</h2>
+    <p>Hunk Barbarian player + 6 adult Moonkin. Full intimacy systems available when media present.</p>
+    <button class="btn sec" onclick="log('Open local full package for dances & climax graphics')">Media note</button>
+  </div>
+
+  <div id="time" class="panel">
+    <h2 style="color:var(--amber)">Time System (Consistent)</h2>
+    <p>One day ≈ 18 real minutes. Periods: Morning → Afternoon → Evening → Night.</p>
+    <p>Current: Day <span id="tday">1</span> · <span id="tperiod">Morning</span> · <span id="tseason">Spring</span></p>
+    <p>Minutes into period: <span id="tmin">0</span></p>
+    <button class="btn" onclick="advancePeriod()">Advance Period</button>
+    <button class="btn" onclick="sleep()">💤 Sleep (to next Morning)</button>
+    <button class="btn sec" onclick="toggleRelaxed()">Toggle Relaxed Time</button>
+    <p id="relaxed-status">Relaxed: off</p>
+  </div>
+</div>
+<div id="privacy"><div>🔒 Privacy</div><div style="font-size:1rem">Press P</div></div>
+
+<script>
+const state = {
+  day:1, period:0, season:0, minutes:0, gold:50, seeds:12, harvested:0,
+  level:1, xp:0, xpNext:100,
+  skills:{farming:1,foraging:1,crafting:1,combat:1,care:1,social:1},
+  skillXp:{farming:0,foraging:0,crafting:0,combat:0,care:0,social:0},
+  inventory:{"softwood":5,"stone":10,"mintleaf":3,"wheat":0,"iron_ingot":0,"glowmoss":0,"monster_core":0},
+  farm:Array(24).fill(0),
+  relaxed:false, lastTick:Date.now()
+};
+const periods=["Morning","Afternoon","Evening","Night"];
+const seasons=["Spring","Summer","Autumn","Winter"];
+const recipes=[
+  {id:"basic_meal",name:"Basic Meal",station:"Kitchen",time:1,inputs:{wheat:2},outputs:{basic_meal:1},skill:"crafting"},
+  {id:"iron_watering_can",name:"Iron Watering Can",station:"Forge",time:2,inputs:{iron_ingot:5,hardwood:2},outputs:{iron_watering_can:1},skill:"crafting"},
+  {id:"moon_salve",name:"Moon Herb Salve",station:"Alchemy",time:1,inputs:{mintleaf:3,glowmoss:1},outputs:{moon_salve:2},skill:"crafting"}
+];
+
+function startGame(){
+  document.getElementById('age-gate').style.display='none';
+  document.getElementById('game').style.display='block';
+  load();
+  renderAll();
+  startTimeLoop();
+  log("Welcome, Barbarian. Homestead, village, forest and systems are online. Time is consistent.");
+}
+
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.tab).classList.add('active');
+});
+
+function enterZone(z){
+  const detail=document.getElementById('zone-detail');
+  const title=document.getElementById('zone-title');
+  const actions=document.getElementById('zone-actions');
+  detail.style.display='block';
+  if(z==='yard'){title.textContent='Homestead Yard';
+    actions.innerHTML='<button class="btn" onclick="gather(\'softwood\',2)">Gather Softwood</button><button class="btn" onclick="gather(\'stone\',3)">Gather Stone</button>';}
+  else if(z==='home'){title.textContent='Farmhouse Interior';
+    actions.innerHTML='<button class="btn" onclick="log(\'Rested in bedroom. +Care XP\');addSkillXp(\'care\',10)">Rest</button><button class="btn" onclick="log(\'Cooked in kitchen\')">Use Kitchen</button>';}
+  else if(z==='village'){title.textContent='Sunfield Village';
+    actions.innerHTML='<button class="btn" onclick="buy(\'seeds\',5,20)">Buy Seeds (20g)</button><button class="btn" onclick="sell(\'wheat\',5)">Sell Wheat</button><button class="btn" onclick="log(\'Talked to villagers. +Social XP\');addSkillXp(\'social\',15)">Talk</button>';}
+  else if(z==='forest'){title.textContent='Whisperwood Forest';
+    actions.innerHTML='<button class="btn" onclick="gather(\'glowmoss\',1)">Forage Glowmoss</button><button class="btn" onclick="gather(\'mintleaf\',2)">Forage Mintleaf</button><button class="btn" onclick="gather(\'hardwood\',1)">Chop Hardwood</button><button class="btn sec" onclick="log(\'Encounter! +Combat XP\');addSkillXp(\'combat\',20);gather(\'monster_core\',1)">Fight Gloam</button>';}
+  log('Entered '+title.textContent);
+}
+
+function gather(id,qty){
+  state.inventory[id]=(state.inventory[id]||0)+qty;
+  addSkillXp('foraging',8*qty);
+  log('Gathered '+qty+' '+id);
+  renderInv();updateHUD();
+}
+
+function buy(item,qty,cost){
+  if(state.gold<cost){log('Not enough gold');return;}
+  state.gold-=cost;
+  if(item==='seeds')state.seeds+=qty;
+  else state.inventory[item]=(state.inventory[item]||0)+qty;
+  log('Bought '+qty+' '+item);
+  updateHUD();renderInv();
+}
+function sell(item,price){
+  if((state.inventory[item]||0)<1){log('None to sell');return;}
+  state.inventory[item]--;
+  state.gold+=price;
+  log('Sold '+item+' +'+price+'g');
+  updateHUD();renderInv();
+}
+
+function renderFarm(){
+  const g=document.getElementById('farm-grid');
+  g.innerHTML='';
+  state.farm.forEach((v,i)=>{
+    const d=document.createElement('div');
+    d.style.cssText='aspect-ratio:1;background:'+(v===2?'#5a8a3a':v===1?'#3a6a4a':'#2a4a3a')+';border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.4rem';
+    d.textContent=v===2?'🌾':v===1?'🌱':'';
+    d.onclick=()=>plotClick(i);
+    g.appendChild(d);
+  });
+}
+function plotClick(i){
+  if(state.farm[i]===0&&state.seeds>0){state.farm[i]=1;state.seeds--;log('Planted');addSkillXp('farming',5);}
+  else if(state.farm[i]===2){state.farm[i]=0;state.harvested++;state.inventory.wheat=(state.inventory.wheat||0)+2;state.gold+=8;log('Harvested +2 wheat');addSkillXp('farming',12);}
+  renderFarm();updateHUD();renderInv();
+}
+function waterAll(){
+  let n=0;
+  state.farm=state.farm.map(v=>{if(v===1){n++;return 2;}return v;});
+  if(n)log('Watered '+n+' plots — ready!');
+  renderFarm();
+}
+
+function renderCraft(){
+  const list=document.getElementById('craft-list');
+  list.innerHTML=recipes.map(r=>{
+    const can=Object.entries(r.inputs).every(([k,v])=>(state.inventory[k]||0)>=v);
+    return `<div class="card"><div class="info"><h3>${r.name}</h3><p>${r.station} · ${r.time} period(s)</p>
+    <p>Needs: ${Object.entries(r.inputs).map(([k,v])=>v+' '+k).join(', ')}</p>
+    <button class="btn" ${can?'':'disabled'} onclick="startCraft('${r.id}')">Craft</button></div></div>`;
+  }).join('');
+}
+function startCraft(id){
+  const r=recipes.find(x=>x.id===id);
+  if(!r)return;
+  for(const [k,v] of Object.entries(r.inputs)){if((state.inventory[k]||0)<v){log('Missing '+k);return;}state.inventory[k]-=v;}
+  log('Started '+r.name+' — will finish in '+r.time+' period(s)');
+  setTimeout(()=>{
+    for(const [k,v] of Object.entries(r.outputs))state.inventory[k]=(state.inventory[k]||0)+v;
+    addSkillXp('crafting',20);
+    log(r.name+' complete!');
+    renderInv();renderCraft();
+  }, state.relaxed?2000:8000);
+  renderInv();renderCraft();
+}
+
+function renderSkills(){
+  document.getElementById('plevel').textContent=state.level;
+  document.getElementById('pxp').textContent=state.xp;
+  document.getElementById('pxpnext').textContent=state.xpNext;
+  document.getElementById('xpbar').style.width=(state.xp/state.xpNext*100)+'%';
+  const list=document.getElementById('skill-list');
+  list.innerHTML=Object.entries(state.skills).map(([k,v])=>`<div style="margin:8px 0"><strong>${k}</strong> Lv ${v}<div class="bar"><div class="bar-fill" style="width:${Math.min(100,state.skillXp[k]/10)}%"></div></div></div>`).join('');
+}
+function addSkillXp(skill,amt){
+  state.skillXp[skill]=(state.skillXp[skill]||0)+amt;
+  if(state.skillXp[skill]>=100 && state.skills[skill]<10){state.skills[skill]++;state.skillXp[skill]=0;log(skill+' leveled to '+state.skills[skill]+'!');}
+  gainXP(Math.floor(amt/2));
+}
+function gainXP(amt){
+  state.xp+=amt;
+  while(state.xp>=state.xpNext){state.xp-=state.xpNext;state.level++;state.xpNext=Math.floor(state.xpNext*1.4);log('LEVEL UP! Now '+state.level); }
+  updateHUD();renderSkills();
+}
+
+function renderInv(){
+  const g=document.getElementById('inv-grid');
+  g.innerHTML=Object.entries(state.inventory).filter(([k,v])=>v>0).map(([k,v])=>`<div class="inv-item">${k}<br><strong>${v}</strong></div>`).join('')||'<p>Empty</p>';
+}
+
+function updateHUD(){
+  document.getElementById('day').textContent=state.day;
+  document.getElementById('period').textContent=periods[state.period];
+  document.getElementById('season').textContent=seasons[state.season];
+  document.getElementById('gold').textContent=state.gold;
+  document.getElementById('level').textContent=state.level;
+  document.getElementById('xp').textContent=state.xp;
+  document.getElementById('seeds').textContent=state.seeds;
+  document.getElementById('harvested').textContent=state.harvested;
+  document.getElementById('tday').textContent=state.day;
+  document.getElementById('tperiod').textContent=periods[state.period];
+  document.getElementById('tseason').textContent=seasons[state.season];
+  document.getElementById('tmin').textContent=Math.floor(state.minutes);
+  document.getElementById('relaxed-status').textContent='Relaxed: '+(state.relaxed?'ON (faster)':'off');
+}
+
+function advancePeriod(){
+  state.period=(state.period+1)%4;
+  state.minutes=0;
+  if(state.period===0){state.day++;if(state.day%28===0)state.season=(state.season+1)%4;}
+  state.farm=state.farm.map(v=>v===1?2:v);
+  log('Time advanced to '+periods[state.period]+' Day '+state.day);
+  updateHUD();renderFarm();
+}
+function sleep(){
+  state.period=0;state.minutes=0;state.day++;
+  if(state.day%28===0)state.season=(state.season+1)%4;
+  state.farm=state.farm.map(v=>v===1?2:v);
+  log('Slept. New day Morning. Crops advanced.');
+  updateHUD();renderFarm();
+}
+function toggleRelaxed(){state.relaxed=!state.relaxed;updateHUD();}
+
+function startTimeLoop(){
+  setInterval(()=>{
+    if(document.hidden)return;
+    const now=Date.now();
+    const delta=(now-state.lastTick)/1000;
+    state.lastTick=now;
+    const rate=state.relaxed?3:1;
+    state.minutes+=delta*rate*(4.5/60);
+    if(state.minutes>=4.5){state.minutes=0;advancePeriod();}
+    updateHUD();
+  },2000);
+}
+
+function log(msg){
+  const el=document.getElementById('log');
+  if(el){el.innerHTML+=`<div>[Day ${state.day} ${periods[state.period]}] ${msg}</div>`;el.scrollTop=el.scrollHeight;}
+}
+function renderAll(){
+  // simple zone cards without external imgs for public repo
+  document.getElementById('zone-grid').innerHTML=`
+    <div class="card zone" onclick="enterZone('yard')"><div class="info"><h3>Homestead Yard</h3><p>Farm, paddock, workbench. Safe.</p></div></div>
+    <div class="card zone" onclick="enterZone('home')"><div class="info"><h3>Farmhouse Interior</h3><p>Kitchen, bedroom, lounge, bath.</p></div></div>
+    <div class="card zone" onclick="enterZone('village')"><div class="info"><h3>Sunfield Village</h3><p>Shops, guild, tavern, clinic.</p></div></div>
+    <div class="card zone" onclick="enterZone('forest')"><div class="info"><h3>Whisperwood Forest</h3><p>Forage, combat, resources.</p></div></div>`;
+  renderFarm();renderCraft();renderSkills();renderInv();updateHUD();
+}
+function save(){localStorage.setItem('moonwild_v11',JSON.stringify(state));log('Saved');}
+function load(){const s=localStorage.getItem('moonwild_v11');if(s)Object.assign(state,JSON.parse(s));}
+
+function togglePrivacy(){document.getElementById('privacy').classList.toggle('show');}
+document.getElementById('privacy').onclick=togglePrivacy;
+document.addEventListener('keydown',e=>{if(e.key==='p'||e.key==='P')togglePrivacy();});
+</script>
+</body>
+</html>
